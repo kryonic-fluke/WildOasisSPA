@@ -6,6 +6,9 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createCabin } from "../../services/apicabins";
+import toast from "react-hot-toast";
 
 const FormRow = styled.div`
   display: grid;
@@ -44,12 +47,26 @@ const Error = styled.span`
 `;
 
 function CreateCabinForm() {
+const queryClient=useQueryClient()
+  
+const {register,handleSubmit,reset}=  useForm();
+const {mutate,isLoading:isCreating}=useMutation({
+  mutationFn:createCabin,
+  onSuccess:()=>{
+    toast.success("New cabin has been successfully created");
+    queryClient.invalidateQueries({
+      queryKey:["cabins"]
 
-  const {register,handleSubmit}=  useForm();
+    });
+    reset();
+  },
+
+  onError:(err)=> toast.error(err.message)
+});
+
 
   function onSubmit(data){
-
-    return 
+    mutate(data)
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -62,6 +79,7 @@ function CreateCabinForm() {
         <Label htmlFor="maxCapacity">Maximum capacity</Label>
         <Input type="number" id="maxCapacity" {...register("maxCapacity")}/>
       </FormRow>
+      {/* maxCapacity: "123"  // The name you passed to register becomes the key */}
 
       <FormRow>
         <Label htmlFor="regularPrice">Regular price</Label>
@@ -88,7 +106,7 @@ function CreateCabinForm() {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button>add cabin</Button>
+        <Button disabled={isCreating}>add cabin</Button>
       </FormRow>
     </Form>
   );
