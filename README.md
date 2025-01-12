@@ -32,3 +32,11 @@ utilities: npm Date-fns ( contains tons of helper functions)
 
 
 when the data is fresh the refetch does not happen , even if i change some value in the database , but after the staleTime time is passed , the data becomes stale  , so as soons as i go to another browser and then return ( you return to the component), the fresh data is fetched 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+nicely formatted notifications using toast lib: npm i react-hot-toast
+
+-------------------------------------------------------------------------
+
+react hook form lib : for simplyfing handeling forms
+

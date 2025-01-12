@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {formatCurrency} from "../../utils/helpers"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import deleteCabins from "../../services/apicabins";
+import toast from "react-hot-toast";
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -48,13 +49,13 @@ function CabinRow({cabin}){
  const {isLoading:isDeleting,mutate}= useMutation({
     mutationFn:deleteCabins, //function that deletes the cabin , and returns a promise
     onSuccess:()=>{
-      alert("successfully deleted!!")
+      toast.success("successfully deleted!!")
       queryClient.invalidateQueries({
         queryKey:["cabins"]  //this will re fetch the data , to update ui on deletion 
       })
     },
 
-    onError:(error)=>alert(error.message),
+    onError:(error)=>toast.error(error.message),
   })
 
   //invalidating the cache as soon as the mutation is done, using onSuccs(can define what happens after sucessful mutation)

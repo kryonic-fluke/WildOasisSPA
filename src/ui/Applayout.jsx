@@ -3,8 +3,6 @@ import SideBar from "./SideBar";
 import Header from "./Header";
 import styled from "styled-components";
 
-
-
 const StyledAppLayout= styled.div`
     display:grid;
     grid-template-columns:26rem 1fr ;
@@ -16,14 +14,23 @@ const Main = styled.main`
     padding :4rem 4.8rem 6.4rem;
 
 `
+const Container=styled.div`
+    max-width: 120rem;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:3.2rem;
+`
 
 function Applayout() {
     return (
         <StyledAppLayout>
-       <Header/>
+       <Header/> 
        <SideBar/>
        <Main>
-        <Outlet/>
+       <Container>
+       <Outlet/>
+       </Container>
        </Main>
         </StyledAppLayout>
     )
