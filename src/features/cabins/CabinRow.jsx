@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import {formatCurrency} from "../../utils/helpers"
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import deleteCabins from "../../services/apicabins";
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -40,7 +42,22 @@ const Discount = styled.div`
 `;
 
 function CabinRow({cabin}){
-  const {name,maxCapicity,regularPrice,discount,image}=cabin
+  const {id: cabinId,name,maxCapicity,regularPrice,discount,image}=cabin
+
+  const queryClient = useQueryClient()
+ const {isLoading:isDeleting,mutate}= useMutation({
+    mutationFn:deleteCabins, //function that deletes the cabin , and returns a promise
+    onSuccess:()=>{
+      alert("successfully deleted!!")
+      queryClient.invalidateQueries({
+        queryKey:["cabins"]  //this will re fetch the data , to update ui on deletion 
+      })
+    },
+
+    onError:(error)=>alert(error.message),
+  })
+
+  //invalidating the cache as soon as the mutation is done, using onSuccs(can define what happens after sucessful mutation)
   return(
     <TableRow role="row">
         <Img src = {image}/>
@@ -60,7 +77,7 @@ function CabinRow({cabin}){
           {formatCurrency(discount)}
         </Discount>
 
-        <button>
+        <button onClick={()=>mutate(cabinId)} disabled={isDeleting}>
           Delete
         </button>
     </TableRow>
