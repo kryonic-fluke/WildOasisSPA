@@ -4,7 +4,7 @@ import Row from "../ui/Row";
 import { getCabins } from "../services/apicabins";
 import { useState } from "react";
 import Button from "../ui/Button"
-import CreateCabinForm from "../features/cabins/CreateCabinForm";
+import CreateCabinForm from "../features/cabins/CreateCabinForm copy";
 function Cabins() {
  
 const [showForm,setShowForm]=useState(false);

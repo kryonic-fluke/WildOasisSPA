@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import deleteCabins from "../../services/apicabins";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import CreateCabinForm from "./CreateCabinForm";
+import CreateCabinForm from "./CreateCabinForm copy";
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
