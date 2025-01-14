@@ -40,3 +40,6 @@ nicely formatted notifications using toast lib: npm i react-hot-toast
 
 react hook form lib : for simplyfing handeling forms
 
+
+using forms we upload the data to the database , to update the ui , we use invalidatequery to  make the previous data stale , so that new data that was uploaded can override the previous data
+
