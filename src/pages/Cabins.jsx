@@ -1,4 +1,4 @@
-import CabinTable from "../features/cabins/CabinTable";
+import CabinTable from "../features/cabins/CabinTable copy";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import { getCabins } from "../services/apicabins";
@@ -20,7 +20,7 @@ const [showForm,setShowForm]=useState(false);
       <CabinTable/>
       <Button onClick={()=>setShowForm((show)=>!show)}>
         Add new cabin
-      </Button>
+      </Button>               
       {showForm && <CreateCabinForm/>}
     </Row>
     </>

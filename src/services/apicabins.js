@@ -42,6 +42,7 @@ export async function createEditCabin(newCabin, id) {
   if (error) {
     throw new Error("Cabin could not be created/updated");
   }
+  if(hasImagePath) return data
 
   // 6. Handle image upload only if there's a new image file
   if (!hasImagePath) {

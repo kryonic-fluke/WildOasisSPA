@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import deleteCabins from "../../services/apicabins";
-import toast from "react-hot-toast";
+
 import { useState } from "react";
+import useDeleteCabin from "./useDeleteCabin";
 import CreateCabinForm from "./CreateCabinForm copy";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import useCreateCabin from "./useCreateCabin";
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -45,53 +46,59 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const [showForm,setShowForm]= useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const { isDeleting, deleteCabin } = useDeleteCabin();
+  const { isCreating, createCabin } = useCreateCabin();
+
   const {
     id: cabinId,
     name,
-    maxCapicity,
+    maxCapacity,
     regularPrice,
     discount,
     image,
+    description,
   } = cabin;
 
-  const queryClient = useQueryClient();
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteCabins, //function that deletes the cabin , and returns a promise
-    onSuccess: () => {
-      toast.success("successfully deleted!!");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"], //this will re fetch the data , to update ui on deletion
-      });
-    },
+  function handleDuplicate() {
+    createCabin({
+      name: `Copy of ${name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+      description,
+    });
+  }
 
-    onError: (error) => toast.error(error.message),
-  });
+  //imported isloading and mutate from a custom hook
+  return (  
+    <>
+      <TableRow role="row">
+        <Img src={image} />
+        <Cabin>{name}</Cabin>
+        <div>Fits up to {maxCapacity} guests</div>
+        <Price>{formatCurrency(regularPrice)}</Price>
+        {discount ? (
+          <Discount>{formatCurrency(discount)}</Discount>
+        ) : (
+          <span>&mdsah;</span>
+        )}{" "}
+        <div>
+          <button onClick={handleDuplicate} disabled={isCreating}>
+            <HiSquare2Stack />
+          </button>
+          <button onClick={() => setShowForm((show) => !show)}>
+            <HiPencil />
+          </button>
 
-  //invalidating the cache as soon as the mutation is done, using onSuccs(can define what happens after sucessful mutation)
-  return (
-      <>
-    <TableRow role="row">
-      <Img src={image} />
-      <Cabin>{name}</Cabin>
-
-      <div>Fits up to {maxCapicity} guests</div>
-
-      <Price>{formatCurrency(regularPrice)}</Price>
-
-      <Discount>{formatCurrency(discount)}</Discount>
-      <div>
-      <button onClick={()=>setShowForm((show)=>!show)} >
-        Edit
-      </button>
-
-      <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
-        Delete
-      </button>
-      </div>
-    </TableRow>
-    {showForm &&<CreateCabinForm cabinToEdit= {cabin}/>}
-      </>
+          <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
+            <HiTrash />
+          </button>
+        </div>
+      </TableRow>
+      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
+    </>
   );
 }
 
