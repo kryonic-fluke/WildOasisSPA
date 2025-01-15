@@ -1,13 +1,9 @@
 import CabinTable from "../features/cabins/CabinTable copy";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import { getCabins } from "../services/apicabins";
-import { useState } from "react";
-import Button from "../ui/Button"
-import CreateCabinForm from "../features/cabins/CreateCabinForm copy";
+import AddCabin from "../features/cabins/AddCabin";
 function Cabins() {
  
-const [showForm,setShowForm]=useState(false);
 
   return (
     <>
@@ -18,10 +14,7 @@ const [showForm,setShowForm]=useState(false);
 
     <Row>
       <CabinTable/>
-      <Button onClick={()=>setShowForm((show)=>!show)}>
-        Add new cabin
-      </Button>               
-      {showForm && <CreateCabinForm/>}
+      <AddCabin/>
     </Row>
     </>
   );

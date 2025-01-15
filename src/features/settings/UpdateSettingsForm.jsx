@@ -31,7 +31,7 @@ function UpdateSettingsForm() {
         <Input type='number' id='breakfast-price' defaultValue={breakfastPrice} onBlur = {(e)=>handleUpdate(e,"breakfastPrice")}/>
       </FormRow>
     </Form>
-  );
+  ); 
 }
 
 export default UpdateSettingsForm;

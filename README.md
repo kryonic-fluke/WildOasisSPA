@@ -43,3 +43,30 @@ react hook form lib : for simplyfing handeling forms
 
 using forms we upload the data to the database , to update the ui , we use invalidatequery to  make the previous data stale , so that new data that was uploaded can override the previous data
 
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Advance react pattern :
+
+to types of reusability : 1- Ui ,2- stateful Logic 
+
+2 types of advance pattern render prop pattern=> : for a complete controle over what the component renders , by passing in a function that tells the component on how to render.
+
+Passing a prop called render (function that tells how to render)
+
+2nd type Higher order patterns : 
+
+
+
+: Compound component pattern => for very self-contained that need/want to manage their own state.Compound components are like fancy super-components 
+
+
+here we can create a set of related components that together achieve a commeon task 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Modal Window 
+
+react portal : feature that allows to render the element outside th parent dom structure while still keeping the component position same on tree 
+using createPortal : receives first arg s jsx , second : where to render the component document.body or document.queryselector
+ensure that the component will never be cut off by over flow :hidden property , if it is used somewhere else
