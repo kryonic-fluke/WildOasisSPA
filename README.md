@@ -22,7 +22,7 @@ it provides with automatic loading and error states
 
 it automatic  refetches to keep states in synced
 
-prefetch data > pagination (data already there before we vist the page)
+prefetch data => pagination (data already there before we vist the page)
 easy remote state mutation 
 in offline state > data is still available for user , due to caching 
 

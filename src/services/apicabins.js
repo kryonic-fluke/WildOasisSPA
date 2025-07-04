@@ -1,4 +1,4 @@
-import supabase, { supabaseUrl } from "./Supabase";
+ import supabase, { supabaseUrl } from "./Supabase";
 
 export async function getCabins() {
   let { data, error } = await supabase.from("cabins").select("*");
@@ -23,7 +23,7 @@ export async function createEditCabin(newCabin, id) {
   // 3. Determine the final image path
   const imagePath = hasImagePath 
     ? newCabin.image 
-    : `${supabaseUrl}/storage/v1/object/public/cabins-images/${imageName}`;
+    : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
   // 4. Prepare the query
   let query = supabase.from("cabins");
@@ -48,7 +48,7 @@ export async function createEditCabin(newCabin, id) {
   if (!hasImagePath) {
     const { error: storageError } = await supabase
       .storage
-      .from("cabins-images")
+      .from("cabin-images")
       .upload(imageName, newCabin.image);
 
     if (storageError) {

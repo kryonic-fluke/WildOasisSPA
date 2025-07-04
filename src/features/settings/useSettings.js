@@ -6,9 +6,9 @@ function useSettings() {
         queryKey:["settings"],
         queryFn:getSettings,
     })
-    return (
-        {isLoading,error,settings}
-    )
+    return {
+        isLoading,error,settings
+    }
 }
 
 export default useSettings;

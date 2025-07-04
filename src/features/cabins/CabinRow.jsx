@@ -69,6 +69,8 @@ function CabinRow({ cabin }) {
       image,
       description,
     });
+
+    
   }
 
   //imported isloading and mutate from a custom hook

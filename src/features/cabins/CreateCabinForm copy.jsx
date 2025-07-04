@@ -26,13 +26,17 @@ function CreateCabinForm({ cabinToEdit = {} ,onCloseModal}) {
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
     //checking what type of image that is getting passed through
+
+    console.log(data);
+    
     if (isEditSession)
       editCabin(
         { newCabinData: { ...data, image }, id: editId },
         {
           onSuccess: (data) => {
-            reset(),
+            reset();
             onCloseModal?.();
+            
           }, //this call back has the access to the data returned by mutation function
         }
       );
