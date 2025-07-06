@@ -102,7 +102,6 @@ function CreateCabinForm({ cabinToEdit = {} ,onCloseModal}) {
           id="discount"
           defaultValue={0}
           {...register("discount", {
-            required: "This filed is required",
             validate: (value) => {
               const regularPrice = Number(getValues().regularPrice);
               return (
