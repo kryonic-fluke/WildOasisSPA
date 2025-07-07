@@ -36,29 +36,29 @@ const FilterButton = styled.button`
   }
 `;
 
-
-function Filter({filterFeild,options}) {
-      const[searchParams,setSearchParams] =useSearchParams();
-    const currentFilter = searchParams.get(filterFeild) ||options.at(0).value;
-  function handleClick(value){
-      searchParams.set(filterFeild,value);
-      setSearchParams(searchParams);
+function Filter({ filterFeild, options }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentFilter = searchParams.get(filterFeild) || options.at(0).value;
+  function handleClick(value) {
+    searchParams.set(filterFeild, value);
+    setSearchParams(searchParams);
   }
   return (
     <div>
-    <StyledFilter>
-    {options.map((option) => (
-        <FilterButton
-        key={option.value}
+      <StyledFilter>
+        {options.map((option) => (
+          <FilterButton
+            key={option.value}
             onClick={() => handleClick(option.value)}
-            active={option.value===currentFilter}
-        >
+            active={option.value === currentFilter}
+            disabled={option.value === currentFilter}
+          >
             {option.label}
-        </FilterButton>
-    ))}
-</StyledFilter>
+          </FilterButton>
+        ))}
+      </StyledFilter>
     </div>
-  )
+  );
 }
 
 export default Filter;
