@@ -4,6 +4,7 @@ import Row from "../ui/Row";
 import BookingTable from "../features/bookings/BookingTable";
 import useBookings from "../features/bookings/useBookings";
 import Spinner from "../ui/Spinner";
+import BookingTableOperations from '../features/bookings/BookingTableOperations'
 function Bookings() {
   const { bookings, isLoading } = useBookings();
   if(isLoading) return <Spinner/>
@@ -11,7 +12,7 @@ function Bookings() {
     <>
       <Row type="horizontal">
         <Heading as="h1">All bookings</Heading>
-
+      <BookingTableOperations/>
         <p>TEST</p>
       </Row>
       <BookingTable />
