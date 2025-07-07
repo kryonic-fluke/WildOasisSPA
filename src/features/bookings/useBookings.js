@@ -17,17 +17,22 @@ const filter = !filterValue||filterValue ==='all' ?null:
 
 const sortByRaw = searchParams.get('sort-by')||'startDate-desc';
 
+//Pagination
+ const page = !searchParams.get("page")
+    ? 1
+    : Number(searchParams.get("page"));
+
 const [field,direction] =sortByRaw.split('-');
 
 const sortBy = {field,direction};
 
 
-    const {isLoading,data:bookings,error,}=  useQuery({
-       queryKey: ['bookings',filter,sortBy],
-        queryFn:  ()=>getBookings({filter,sortBy}),
+    const {isLoading,data}=  useQuery({
+       queryKey: ['bookings',filter,sortBy,page],
+        queryFn:  ()=>getBookings({filter,sortBy,page}),
       })
     return (
-       {isLoading ,bookings}
+      { isLoading, bookings: data?.data, count: data?.count }
     )
 }
 
