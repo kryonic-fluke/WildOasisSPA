@@ -1,15 +1,16 @@
 import styled from "styled-components";
-
-import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
 import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
-
 import { useMoveBack } from "../../hooks/useMoveBack";
-
+import Spinner from "../../ui/Spinner";
+import useBooking from "./useBooking";
+import BookingDataBox from './BookingDataBox';
+import { HiArrowDownOnSquare } from "react-icons/hi2";
+import {useNavigate} from 'react-router-dom';
 const HeadingGroup = styled.div`
   display: flex;
   gap: 2.4rem;
@@ -17,11 +18,14 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
-  const booking = {};
-  const status = "checked-in";
-
+  const {booking,isLoading} = useBooking();
+  const navigate =useNavigate();
+  console.log(booking);
+  
   const moveBack = useMoveBack();
+  if (isLoading) return <Spinner/>
 
+  const {status,id:bookingId}  = booking;
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
@@ -32,7 +36,7 @@ function BookingDetail() {
     <>
       <Row type="horizontal">
         <HeadingGroup>
-          <Heading as="h1">Booking #X</Heading>
+          <Heading as="h1">Booking {bookingId}X</Heading>
           <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
         </HeadingGroup>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
@@ -41,12 +45,22 @@ function BookingDetail() {
       <BookingDataBox booking={booking} />
 
       <ButtonGroup>
-        <Button variation="secondary" onClick={moveBack}>
+        
+        { status==='unconfirmed' &&<Button
+            icon={<HiArrowDownOnSquare />}
+            onClick={() => navigate(`/checkin/${bookingId}`)}
+          >
+              Check In
+          </Button>
+          }
+           <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
       </ButtonGroup>
-    </>
+        </>
   );
+
+
 }
 
 export default BookingDetail;
