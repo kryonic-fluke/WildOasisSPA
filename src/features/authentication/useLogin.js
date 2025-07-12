@@ -13,7 +13,7 @@ export function useLogin() {
          email,password
     }),
     onSuccess:(user)=>{
-        queryClient.setQueriesData(['users'],user)  //manually setting cache , when the user logged in
+        queryClient.setQueryData(['users'],user.user)  //manually setting cache , when the user logged in
             navigate('/dashboard',{replace:true});
             console.log(user);
             
