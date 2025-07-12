@@ -1,4 +1,4 @@
-import { useQueries, useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 import { getCurrentUser } from "../../services/apiAuth";
 
 
@@ -12,7 +12,7 @@ export function useUserHook() {
 
    })
 
-   return {isLoading,user}
+   return {isLoading,user,isAuthenticated:user?.role==="authenticated"}
 }
 
 export default useUserHook;
