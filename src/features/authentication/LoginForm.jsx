@@ -13,7 +13,12 @@ function LoginForm()  {
       e.preventDefault();
 
       if(!email||!password) return console.log('error occured');
-      login({email,password});
+      login({email,password},{
+        onSettled:()=>{
+          setEmail('');
+          setPassword('');
+        }
+      });
 
       
   }

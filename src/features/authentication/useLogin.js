@@ -14,7 +14,7 @@ export function useLogin() {
     }),
     onSuccess:(user)=>{
         queryClient.setQueriesData(['users'],user)  //manually setting cache , when the user logged in
-            navigate('/dashboard');
+            navigate('/dashboard',{replace:true});
             console.log(user);
             
             
