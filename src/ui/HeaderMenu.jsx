@@ -4,6 +4,7 @@ import ButtonIcon from "./ButtonIcon";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
 
 
 const StyledHeaderMenu = styled.ul`
@@ -23,6 +24,7 @@ const navigate = useNavigate();
         </ButtonIcon>
     </li>
     <li>
+        <DarkModeToggle/>
         <Logout/>
     </li>
    </StyledHeaderMenu>)
