@@ -6,13 +6,13 @@ import { formatCurrency } from '../utils/helpers';
 
 export function Stats({bookings,confirmedStays,numDays,cabinCount}) {
    
-    const numBookings = bookings.length;
+    const numBookings = bookings?.length;
 
-        const sales = bookings.reduce((acc,cur)=> acc+ cur.totalPrice,0);
+        const sales = bookings?.reduce((acc,cur)=> acc+ cur.totalPrice,0);
 
-        const checkin =confirmedStays.length;
+        const checkin =confirmedStays?.length;
 
-        const occuptation = confirmedStays.reduce((acc,cur)=>acc+cur.numNights,0) /(numDays*cabinCount);
+        const occuptation = confirmedStays?.reduce((acc,cur)=>acc+cur.numNights,0) /(numDays*cabinCount);
 
 
 
