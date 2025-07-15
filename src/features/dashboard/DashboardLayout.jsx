@@ -6,6 +6,7 @@ import Stats from "../../ui/Stats";
 import useCabins from "../../features/cabins/useCabins";
 import SalesChart from "../dashboard/SalesChart";
 import DurationChart from "./DurationChart";
+import TodayActivity from "../check-in-out/TodayActivity";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -20,7 +21,6 @@ function DashboardLayout() {
 
   const {
     isLoading: isLoading2,
-    stays,
     confirmedStays,
     numDays,
   } = useRecentStays();
@@ -41,7 +41,7 @@ function DashboardLayout() {
           cabinCount={cabins?.length}
         />
 
-        <div>Today activity</div>
+        <TodayActivity>Today activity</TodayActivity>
        <DurationChart confirmedStays={confirmedStays}/>
         <SalesChart bookings={bookings} numDays={numDays}/>
 
