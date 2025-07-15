@@ -65,6 +65,8 @@ export async function getBookingsAfterDate(date) {
 
 // Returns all STAYS that are were created after the given date
 export async function getStaysAfterDate(date) {
+  console.log(date);
+  
   const { data, error } = await supabase
     .from("bookings")
     // .select('*')
@@ -77,6 +79,9 @@ export async function getStaysAfterDate(date) {
     throw new Error("Bookings could not get loaded");
   }
 
+
+  console.log('stays',data);
+  
   return data;
 }
 
@@ -117,7 +122,7 @@ export async function updateBooking(id, obj) {
 }
 
 export async function deleteBooking(id) {
-  // REMEMBER RLS POLICIES
+  
   const { data, error } = await supabase.from("bookings").delete().eq("id", id);
 
   if (error) {
