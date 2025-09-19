@@ -15,7 +15,6 @@ function UpdateUserDataForm() {
       user_metadata: { fullName: currentFullName },
     },
   } = useUserHook();
-
   const {updateUser,isUpdating}  = useUpdateUserHook();
   const [fullName, setFullName] = useState(currentFullName);
   const [avatar, setAvatar] = useState(null);
@@ -33,11 +32,15 @@ function UpdateUserDataForm() {
     
   }
 
+  function handleFocus(e) {
+    e.target.select();
+  }
 
 
-  function handleCancel(){
+  function handleCancel(e){
       setFullName(currentFullName);
       setAvatar(null);
+      e.targetreset();
   }
   return (
     <Form onSubmit={handleSubmit}>
@@ -51,6 +54,8 @@ function UpdateUserDataForm() {
           onChange={(e) => setFullName(e.target.value)}
           id="fullName"
           disabled={isUpdating}
+            onFocus={handleFocus}
+
         />
       </FormRow>
       <FormRow label="Avatar image">
@@ -59,11 +64,10 @@ function UpdateUserDataForm() {
           accept="image/*"
           onChange={(e) => setAvatar(e.target.files[0])}
           disabled={isUpdating}
-          
         />
       </FormRow>
       <FormRow>
-        <Button type="reset" variation="secondary" 
+        <Button type="button" variation="secondary" 
           disabled={isUpdating} onClick = {handleCancel}
          >
           Cancel

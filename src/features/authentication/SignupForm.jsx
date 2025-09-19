@@ -9,7 +9,6 @@ import useSignUp from "./useSignUp";
 
 
 
-// Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
 
@@ -51,7 +50,6 @@ function onSubmit({fullName,email,password}){
       </FormRow>
 
       <FormRow>
-        {/* type is an HTML attribute! */}
         <Button variation="secondary" type="reset" disabled={isLoading} onClick={reset}>
           Cancel
         </Button>

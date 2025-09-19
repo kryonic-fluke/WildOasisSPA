@@ -98,7 +98,7 @@ button,
 textarea,
 select {
   font: inherit;
-  color: inherit;
+   color: var(--color-gray-800);
 }
 
 button {
@@ -111,8 +111,8 @@ button {
 
 select:disabled,
 input:disabled {
-  background-color: var(--color-grey-200);
-  color: var(--color-grey-500);
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-700);
 }
 
 input:focus,
@@ -123,7 +123,6 @@ select:focus {
   outline-offset: -1px;
 }
 
-/* Parent selector, finally 😃 */
 button:has(svg) {
   line-height: 0;
 }
